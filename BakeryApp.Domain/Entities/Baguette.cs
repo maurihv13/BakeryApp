@@ -8,6 +8,10 @@ namespace BakeryApp.Domain.Entities
 {
     public class Baguette : Bread
     {
+        public Baguette(Ingredients ingredients, Preparation preparation, int Price) : base(ingredients, preparation, Price)
+        {
+        }
+
         public override void makeBread(int Amount)
         {
             throw new NotImplementedException();
@@ -39,6 +43,11 @@ namespace BakeryApp.Domain.Entities
         }
 
         protected override void shapeDough()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void foldDough()
         {
             throw new NotImplementedException();
         }

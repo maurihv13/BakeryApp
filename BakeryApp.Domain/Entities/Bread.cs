@@ -8,12 +8,21 @@ namespace BakeryApp.Domain.Entities
 {
     public abstract class Bread
     {
-        public required Ingredients Ingredients;
-        public required Preparation Preparation;
-        public Bread() { 
+        private readonly Ingredients ingredients;
+        private readonly Preparation preparation;
+        public double Price { get; }
+        public Bread(Ingredients ingredients, Preparation preparation, double Price) 
+        {
+            this.ingredients = ingredients;
+            this.preparation = preparation;
+            this.Price = Price;
         }
 
-        public abstract void makeBread(int Amount);
+        public virtual void makeBread(int Amount) 
+        {
+            Console.WriteLine($"Preparing {Amount} breads...");
+            Console.WriteLine("Preparation completed");
+        }
         protected abstract void mixIngredients();
         protected abstract void cutDough();
         protected abstract void letDoughRest();

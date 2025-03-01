@@ -8,10 +8,10 @@ namespace BakeryApp.Domain.Entities
 {
     public class Ingredients
     {
-        public int FlourGrams { get; private set; }
-        public int WaterGrams { get; private set; }
-        public int SaltGrams { get; private set; }
-        public int YeastGrams { get; private set; }
+        public int FlourGrams { get; }
+        public int WaterGrams { get; }
+        public int SaltGrams { get; }
+        public int YeastGrams { get; }
         public Ingredients() { }
     }
 }

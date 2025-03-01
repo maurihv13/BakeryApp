@@ -8,10 +8,10 @@ namespace BakeryApp.Domain.Entities
 {
     public class Preparation
     {
-        public string Cookingtime;
-        public string RestingTime;
-        public string FermentTime;
-        public string CookingTemp;
+        public string Cookingtime { get; }
+        public string RestingTime { get; }
+        public string FermentTime { get; }
+        public string CookingTemp { get; }
         public Preparation() { }
     }
 }
