@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BakeryApp.Domain.Entities
 {
-    public class Baguette : Bread
+    public class MilkBread : Bread
     {
-        public Baguette(Preparation preparation, int Price) : base(preparation, Price, "Baguette")
+        public MilkBread(Preparation preparation, double price) : base(preparation, price, "Milk Bread")
         {
         }
 
-        protected override void MixIngredients(int Amount)
+        protected override void Cook(int Amount)
         {
             throw new NotImplementedException();
         }
@@ -22,27 +22,22 @@ namespace BakeryApp.Domain.Entities
             throw new NotImplementedException();
         }
 
-        protected override void LetDoughRest(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void ShapeDough(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void LetDoughFerment(int Amount)
         {
             throw new NotImplementedException();
         }
 
-        protected override void Cook(int Amount)
+        protected override void LetDoughRest(int Amount)
         {
             throw new NotImplementedException();
         }
 
-        private void FoldDough(int Amount)
+        protected override void MixIngredients(int Amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void ShapeDough(int Amount)
         {
             throw new NotImplementedException();
         }
