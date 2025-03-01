@@ -10,12 +10,12 @@ namespace BakeryApp.Domain.Entities
     {
         private readonly Preparation _preparation;
         public double Price { get; }
-
         public string Name { get; }
+
         public Bread(Preparation preparation, double price, string name) 
         {
             _preparation = preparation;
-            Price = Price;
+            Price = price;
             Name = name;
         }
 

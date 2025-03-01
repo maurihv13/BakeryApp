@@ -1,1 +1,33 @@
+
 .vs/
+# Output directories
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Files built by Visual Studio
+*.dll
+*.exe
+*.pdb
+*.cache
+*.ilk
+*.log
+*.wrn
+*.err
+*.scc
+*.orig
+*.rej
+*.manifest
+*.tlog
+*.lastbuildstate
+*.vspscc
+*.vssscc
+*.userprefs
+*.sln.docstates
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/

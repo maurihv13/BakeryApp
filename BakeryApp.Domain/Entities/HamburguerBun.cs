@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace BakeryApp.Domain.Entities
 {
-    public class HamburguerBun : Bread
+    public class HamburguerBun(Preparation preparation, double price) : Bread(preparation, price, "Hamburguer Bun")
     {
-        public HamburguerBun(Preparation preparation, double price) : base(preparation, price, "Hamburguer Bun")
-        {
-        }
-
         protected override void Cook(int Amount)
         {
             throw new NotImplementedException();

@@ -5,7 +5,7 @@ namespace BakeryApp.Domain.Entities
 {
     public class BakeryOffice
     {
-        private readonly string _name;
+        public string Name { get;  }
         private readonly string _address;
         private readonly int _maxCapacity;
         private int _currentAmount;
@@ -14,7 +14,7 @@ namespace BakeryApp.Domain.Entities
 
         public BakeryOffice(string name, string address, int maxCapacity) 
         {
-            _name = name;
+            Name = name;
             _address = address;
             _maxCapacity = maxCapacity;
             _menu = [];
