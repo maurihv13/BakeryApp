@@ -45,7 +45,7 @@ namespace BakeryApp.Application.Services
                 { 
                     Console.WriteLine($"Preparing: {detail.Bread}, amount ordered: {detail.Amount}");
                     var bread = detail.Bread;
-                    bread.makeBread(detail.Amount); // Show preparation in console log
+                    bread.MakeBread(detail.Amount); // Show preparation in console log
                 }
             }
             office.CleanOrders(); // Clear processed orders ...

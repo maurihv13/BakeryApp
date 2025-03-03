@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakeryApp.Console", "BakeryApp.Console\BakeryApp.Console.csproj", "{F180AFC1-99D6-4841-88C8-5A537A9AA877}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakeryApp.Presentation", "BakeryApp.Console\BakeryApp.Presentation.csproj", "{F180AFC1-99D6-4841-88C8-5A537A9AA877}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakeryApp.Domain", "BakeryApp.Domain\BakeryApp.Domain.csproj", "{7144DEE8-AE34-4CB8-815A-92ED26AC4476}"
 EndProject

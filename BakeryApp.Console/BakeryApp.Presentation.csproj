@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BakeryApp.Application\BakeryApp.Application.csproj" />
+    <ProjectReference Include="..\BakeryApp.Domain\BakeryApp.Domain.csproj" />
     <ProjectReference Include="..\BakeryApp.Infrastructure\BakeryApp.Infrastructure.csproj" />
   </ItemGroup>
 

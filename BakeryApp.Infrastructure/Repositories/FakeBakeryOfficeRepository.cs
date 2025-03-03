@@ -45,7 +45,7 @@ namespace BakeryApp.Infrastructure.Repositories
             return _bakeryOffices;
         }
 
-        public BakeryOffice? GetBakeryOffice(string name)
+        public BakeryOffice? GetBakeryOfficeByName(string name)
         {
             return _bakeryOffices.Find(office => office.Name == name);
         }

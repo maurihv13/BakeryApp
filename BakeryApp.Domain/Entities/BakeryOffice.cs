@@ -5,31 +5,31 @@ namespace BakeryApp.Domain.Entities
 {
     public class BakeryOffice
     {
-        public string Name { get;  }
-        private readonly string _address;
+        public string Name { get; }
+        public string Address { get; }
         private readonly int _maxCapacity;
         private int _currentAmount;
-        private List<Bread> _menu;
+        public List<Bread> Menu { get; }
         public List<OrderList> Orders { get; }
 
         public BakeryOffice(string name, string address, int maxCapacity) 
         {
             Name = name;
-            _address = address;
+            Address = address;
             _maxCapacity = maxCapacity;
-            _menu = [];
+            Menu = [];
             Orders = [];
         }
 
         public void AddBread(Bread bread) 
         {
-            _menu.Add(bread);
+            Menu.Add(bread);
         }
 
         public bool AddOrder(OrderList newOrder)
         {
             int orderAmount = newOrder.OrderAmount();
-            if (CanAcceptOrder(orderAmount)) return false;
+            if (!CanAcceptOrder(orderAmount)) return false;
             Orders.Add(newOrder);
             _currentAmount += orderAmount;
             return true;
