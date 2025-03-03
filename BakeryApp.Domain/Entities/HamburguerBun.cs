@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BakeryApp.Domain.Entities
 {
-    public class Baguette(Preparation preparation, double price) : Bread(preparation, price, "Baguette")
+    public class HamburguerBun(Preparation preparation, double price) : Bread(preparation, price, "Hamburguer Bun")
     {
-        protected override void MixIngredients(int Amount)
+        protected override void Cook(int Amount)
         {
             throw new NotImplementedException();
         }
@@ -18,7 +18,17 @@ namespace BakeryApp.Domain.Entities
             throw new NotImplementedException();
         }
 
+        protected override void LetDoughFerment(int Amount)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void LetDoughRest(int Amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void MixIngredients(int Amount)
         {
             throw new NotImplementedException();
         }
@@ -28,17 +38,7 @@ namespace BakeryApp.Domain.Entities
             throw new NotImplementedException();
         }
 
-        protected override void LetDoughFerment(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void Cook(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void FoldDough(int Amount)
+        private void PlaceOnTop(int Amount) 
         {
             throw new NotImplementedException();
         }

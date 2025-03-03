@@ -1,4 +1,0 @@
-C:\Mahv\Bootcamp\BackEnd\final-project\BakeryApp\BakeryApp.Domain\obj\Debug\net8.0\BakeryApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
-C:\Mahv\Bootcamp\BackEnd\final-project\BakeryApp\BakeryApp.Domain\obj\Debug\net8.0\BakeryApp.Domain.AssemblyInfoInputs.cache
-C:\Mahv\Bootcamp\BackEnd\final-project\BakeryApp\BakeryApp.Domain\obj\Debug\net8.0\BakeryApp.Domain.AssemblyInfo.cs
-C:\Mahv\Bootcamp\BackEnd\final-project\BakeryApp\BakeryApp.Domain\obj\Debug\net8.0\BakeryApp.Domain.csproj.CoreCompileInputs.cache
