@@ -5,19 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using BakeryApp.Application.Interfaces;
 using BakeryApp.Domain.Entities;
+using BakeryApp.Infrastructure.Repositories;
 
 namespace BakeryApp.Application.Services
 {
     public class OfficeService : IOfficeService
     {
-        public BakeryOffice GetOfficeByName(string name)
+        private readonly FakeBakeryOfficeRepository _repository;
+
+        public OfficeService(FakeBakeryOfficeRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public List<string> GetOfficeNames()
+        public List<BakeryOffice> GetAllOffices() => _repository.GetAllBakeryOffices();
+
+        public BakeryOffice GetOfficeByName(string name)
         {
-            throw new NotImplementedException();
+            return _repository.GetBakeryOfficeByName(name) ?? throw new InvalidOperationException($"Office with name {name} not found.");
         }
     }
 }

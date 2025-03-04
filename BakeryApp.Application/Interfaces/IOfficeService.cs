@@ -9,8 +9,7 @@ namespace BakeryApp.Application.Interfaces
 {
     public interface IOfficeService
     {
+        public List<BakeryOffice> GetAllOffices();
         public BakeryOffice GetOfficeByName(string name);
-
-        public List<string> GetOfficeNames();
     }
 }

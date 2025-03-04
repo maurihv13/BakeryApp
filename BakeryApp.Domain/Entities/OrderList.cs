@@ -22,6 +22,11 @@ namespace BakeryApp.Domain.Entities
             Details.Add(order);
         }
 
+        public void AddOrder(Bread bread, int amount) 
+        {
+            Details.Add(new OrderDetail(bread, amount));
+        }
+
         public int OrderAmount() {
             int totalAmount = 0;
             foreach (OrderDetail order in Details) { 

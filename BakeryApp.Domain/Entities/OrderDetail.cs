@@ -20,5 +20,9 @@ namespace BakeryApp.Domain.Entities
         {
             return Bread.Price * Amount;
         }
+
+        public override string ToString() {
+            return $"Bread: {Bread.Name} - Amount: {Amount}";
+        }
     }
 }
