@@ -24,10 +24,10 @@ namespace BakeryApp.Infrastructure.Repositories
 
         private void InitializeBreads() 
         {
-            var baguette = new Baguette(new Preparation("", "", "", ""), 2.0);
-            var whiteBread = new WhiteBread(new Preparation("", "", "", ""), 2.5);
-            var milkBread = new MilkBread(new Preparation("", "", "", ""), 1.5);
-            var hamburguerBun = new HamburguerBun(new Preparation("", "", "", ""), 1.0);
+            var baguette = new Baguette();
+            var whiteBread = new WhiteBread();
+            var milkBread = new MilkBread();
+            var hamburguerBun = new HamburguerBun();
 
             var mainOffice = _bakeryOffices[0];
             mainOffice.AddBread(baguette);

@@ -42,8 +42,7 @@ namespace BakeryApp.Application.Services
             foreach (var order in office.Orders) 
             {
                 foreach (var detail in order.Details) 
-                { 
-                    Console.WriteLine($"Preparing: {detail.Bread}, amount ordered: {detail.Amount}");
+                {
                     var bread = detail.Bread;
                     bread.MakeBread(detail.Amount); // Show preparation in console log
                 }

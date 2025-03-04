@@ -144,10 +144,6 @@ namespace BakeryApp.Presentation.UI
 
         private void ShowPreparationOrders(BakeryOffice office) 
         { 
-            Console.WriteLine("Showing prepatarion process");
-            foreach (var order in office.Orders) {
-                Console.WriteLine("One order to process");
-            }
             _orderService.ProcessOrders(office.Name);
         }
 

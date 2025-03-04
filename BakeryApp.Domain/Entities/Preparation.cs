@@ -12,7 +12,7 @@ namespace BakeryApp.Domain.Entities
         public string RestingTime { get; }
         public string FermentTime { get; }
         public string CookingTemp { get; }
-        public List<Ingredient> Ingredients { get; }
+        public List<Ingredient> Ingredients { get; private set; }
 
         public Preparation(string cookingTime, string restingTime, string fermentTime, string cookingTemp) 
         {
@@ -20,12 +20,17 @@ namespace BakeryApp.Domain.Entities
             RestingTime = restingTime;
             FermentTime = fermentTime;
             CookingTemp = cookingTemp;
-            Ingredients = new List<Ingredient>();
+            Ingredients = [];
         }
 
-        public void AddIngredient(Ingredient ingredient) 
+        public void AddIngredients(List<Ingredient> ingredients) 
         {
-            Ingredients.Add(ingredient);
+            Ingredients = ingredients;
+        }
+
+        public void AddIngredient(string name, int quantity) 
+        {
+            Ingredients.Add(new Ingredient(name, quantity));
         }
     }
 }
