@@ -23,34 +23,18 @@ namespace BakeryApp.Domain.Entities
             Preparation.AddIngredient("Lemon zest", 1);
             Preparation.AddIngredient("Vanilla essence", 1);
         }
-        protected override void Cook(int Amount)
-        {
-            throw new NotImplementedException();
-        }
 
-        protected override void CutDough(int Amount)
+        public override void MakeBread(int amount)
         {
-            throw new NotImplementedException();
-        }
-
-        protected override void LetDoughFerment(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void LetDoughRest(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        /*protected override void MixIngredients(int Amount)
-        {
-            throw new NotImplementedException();
-        }*/
-
-        protected override void ShapeDough(int Amount)
-        {
-            throw new NotImplementedException();
+            var sb = new StringBuilder();
+            sb.AppendLine($"Making {amount} {Name} breads...");
+            sb.AppendLine(base.MixIngredients(amount));
+            if (amount > 1) sb.AppendLine(base.CutDough());
+            sb.AppendLine(base.LetDoughRest());
+            sb.AppendLine(base.ShapeDough());
+            sb.AppendLine(base.LetDoughFerment());
+            sb.AppendLine(base.Cook());
+            Console.WriteLine(sb.ToString());
         }
     }
 }

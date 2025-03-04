@@ -117,12 +117,12 @@ namespace BakeryApp.Presentation.UI
                 
 
                 Console.WriteLine("Current Order made: ");
-                Console.WriteLine("------ ------");
+                Console.WriteLine("====== * ======");
                 foreach (var detail in order.Details) 
                 {
                     Console.WriteLine(detail.ToString());
                 }
-                Console.WriteLine("------ ------");
+                Console.WriteLine("====== * ======");
 
                 Console.Write("Choose One: ");
                 var select = int.Parse(Console.ReadLine()); // Control error

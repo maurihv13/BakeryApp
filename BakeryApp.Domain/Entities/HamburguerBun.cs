@@ -23,39 +23,24 @@ namespace BakeryApp.Domain.Entities
             Preparation.AddIngredient("Sesame seed", 10);
             Preparation.AddIngredient("Gilding", 5);
         }
-        protected override void Cook(int Amount)
+
+        public override void MakeBread(int amount)
         {
-            throw new NotImplementedException();
+            var sb = new StringBuilder();
+            sb.AppendLine($"Making {amount} {Name} breads...");
+            sb.AppendLine(base.MixIngredients(amount, 2)); // Ignore sesame and gilding
+            if (amount > 1) sb.AppendLine(base.CutDough());
+            sb.AppendLine(base.LetDoughRest());
+            sb.AppendLine(base.ShapeDough());
+            sb.AppendLine(base.LetDoughFerment());
+            sb.AppendLine(PlaceOnTop());
+            sb.AppendLine(base.Cook());
+            Console.WriteLine(sb.ToString());
         }
 
-        protected override void CutDough(int Amount)
+        private string PlaceOnTop() 
         {
-            throw new NotImplementedException();
-        }
-
-        protected override void LetDoughFerment(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void LetDoughRest(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        /*protected override void MixIngredients(int Amount)
-        {
-            throw new NotImplementedException();
-        }*/
-
-        protected override void ShapeDough(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void PlaceOnTop(int Amount) 
-        {
-            throw new NotImplementedException();
+            return "Place on top of the dough the seamed seen and the gilding.";
         }
     }
 }

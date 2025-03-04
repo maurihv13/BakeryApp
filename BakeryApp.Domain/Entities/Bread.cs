@@ -19,25 +19,38 @@ namespace BakeryApp.Domain.Entities
             Name = name;
         }
 
-        public virtual void MakeBread(int amount) 
+        public abstract void MakeBread(int amount);
+        protected virtual string MixIngredients(int amount, int ignore = 0) 
         {
-            Console.WriteLine($"Making {amount} {Name} breads...");
-            MixIngredients(amount);
-            Console.WriteLine($"{Name} preparation completed...");
-        }
-        protected virtual void MixIngredients(int amount) 
-        {
-            Console.Write("Mixing the ");
-            foreach (var ingredient in Preparation.Ingredients) 
+            var sb = new StringBuilder();
+            sb.Append("Mixing the ");
+            for (int i = 0; i < Preparation.Ingredients.Count - ignore; i++)
             {
-                Console.Write($"{ingredient.Quantity * amount} {ingredient.Unit} of {ingredient.Name}, ");
+                var ingredient = Preparation.Ingredients[i];
+                sb.Append($"{ingredient.Quantity * amount} {ingredient.Unit} of {ingredient.Name}");
+                if (i < Preparation.Ingredients.Count - (1 + ignore)) sb.Append(", ");
+                else sb.Append('.');
             }
-            Console.WriteLine();
+            return sb.ToString();
         }
-        protected abstract void CutDough(int amount);
-        protected abstract void LetDoughRest(int amount);
-        protected abstract void ShapeDough(int amount);
-        protected abstract void LetDoughFerment(int amount);
-        protected abstract void Cook(int amount);
+        protected virtual string CutDough() {
+            return "Cut the dough.";
+        }
+        protected virtual string LetDoughRest() 
+        {
+            return $"Let the dough rest {Preparation.RestingTime}.";
+        }
+        protected virtual string ShapeDough() 
+        {
+            return "Shape the dough.";
+        }
+        protected virtual string LetDoughFerment() 
+        {
+            return $"Let the dough ferment {Preparation.FermentTime}.";
+        }
+        protected virtual string Cook() 
+        {
+            return $"Cook for {Preparation.CookingTime} at {Preparation.CookingTemp}.";
+        }
     }
 }
