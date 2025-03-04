@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BakeryApp.Application.Services;
+using BakeryApp.Application.UseCases;
 using BakeryApp.Domain.Entities;
 
 namespace BakeryApp.Presentation.UI
@@ -99,9 +100,19 @@ namespace BakeryApp.Presentation.UI
         }
 
         private void ShowAddOrderMenu(BakeryOffice office) 
-        { 
-            var order = new OrderList("customer name");
-            var breads = office.Menu;
+        {
+            var breadItems = new List<(string BreadType, int Quantity)>();
+            var breads = _officeService.GetBreads(office.Name);
+            var addOrder = new AddOrderUseCase(_orderService);
+
+            Console.Write("Introduce customer's name: ");
+
+            string? customerName = Console.ReadLine();
+            if (string.IsNullOrEmpty(customerName))
+            {
+                DisplayErrorMessage("Customer name cannot be empty.");
+                return;
+            }
 
             while (true) 
             {
@@ -110,35 +121,61 @@ namespace BakeryApp.Presentation.UI
                 Console.WriteLine("Enter bread type: ");
                 for (int i = 0; i < breads.Count; i++) {
                     var bread = breads[i];
-                    Console.WriteLine($"{i + 1}. {bread.Name}");
+                    Console.WriteLine($"{i + 1}. {bread}");
                 }
                 Console.WriteLine("0. Finish Order");
 
                 
 
-                Console.WriteLine("Current Order made: ");
-                Console.WriteLine("====== * ======");
-                foreach (var detail in order.Details) 
-                {
-                    Console.WriteLine(detail.ToString());
+                Console.WriteLine($"Current {customerName}'s order:");
+                if (breadItems.Count > 0) 
+                { 
+                    Console.WriteLine("====== * ======");
+                    foreach (var item in breadItems) 
+                    {
+                        Console.WriteLine($"{item.BreadType} - {item.Quantity}");
+                    }
+                    Console.WriteLine("====== * ======");
                 }
-                Console.WriteLine("====== * ======");
 
                 Console.Write("Choose One: ");
-                var select = int.Parse(Console.ReadLine()); // Control error
+                var input = Console.ReadLine(); // Control error
 
-                if (select == 0) 
+                try
                 {
-                    // Control amount limit and confirmation message
-                    office.AddOrder(order);
-                    return;
+                    var select = int.Parse(input);
+                    if (select == 0)
+                    {
+                        double orderPrice = addOrder.GetPrice(breadItems);
+                        Console.WriteLine($"Total order price: {orderPrice}");
+                        Console.Write("Are you sure you want to finish the order? (yes/no): ");
+                        var confirmation = Console.ReadLine();
+                        if (confirmation?.ToLower() == "yes")
+                        {
+                            var result = addOrder.Execute(office.Name, breadItems, customerName);
+                            DisplayMessage(result);
+                            return;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    Console.Write("Enter the Quantity: ");
+                    input = Console.ReadLine();
+                    var quantity = int.Parse(input);
+
+                    breadItems.Add((breads[select - 1], quantity));
                 }
-
-                Console.Write("Enter the Quantity: ");
-                var quantity = int.Parse(Console.ReadLine());
-
-                order.AddOrder(breads[select - 1], quantity);
-
+                catch (FormatException)
+                {
+                    DisplayErrorMessage("Invalid input. Please enter a valid number.");
+                }
+                catch (Exception ex) 
+                {
+                    DisplayErrorMessage(ex.Message);
+                }
             }
         }
 
@@ -151,6 +188,13 @@ namespace BakeryApp.Presentation.UI
         private void DisplayErrorMessage(string message) 
         {
             Console.WriteLine($"Error: {message}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        private void DisplayMessage(string message) 
+        {
+            Console.WriteLine($"{message}");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }

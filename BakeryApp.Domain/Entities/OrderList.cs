@@ -8,12 +8,17 @@ namespace BakeryApp.Domain.Entities
 {
     public class OrderList
     {
-        public string customerName;
+        public string CustomerName { get; set; }
         public List<OrderDetail> Details { get; }
 
+        public OrderList() 
+        {
+            Details = [];
+        }
+        
         public OrderList(string customerName) 
         { 
-            this.customerName = customerName;
+            CustomerName = customerName;
             Details = [];
         }
 
@@ -33,6 +38,16 @@ namespace BakeryApp.Domain.Entities
                 totalAmount += order.Amount;
             }
             return totalAmount;
+        }
+
+        public double TotalPrice() 
+        { 
+            double totalPrice = 0;
+            foreach (OrderDetail order in Details) 
+            {
+                totalPrice += order.GetPrice(); 
+            }
+            return totalPrice;
         }
     }
 }

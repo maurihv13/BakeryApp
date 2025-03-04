@@ -26,6 +26,11 @@ namespace BakeryApp.Application.Services
             return office.AddOrder(order);
         }
 
+        public int GetRemainingCapacity(string officeName) 
+        {
+            return _officeService.GetRemainingCapacity(officeName);
+        }
+
         public void ProcessOrders(string officeName)
         {
             var office = _officeService.GetOfficeByName(officeName);
