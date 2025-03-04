@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BakeryApp.Domain.Entities
 {
@@ -17,8 +14,9 @@ namespace BakeryApp.Domain.Entities
             Preparation.AddIngredient("Yeast", 5);
         }
 
-        public override void MakeBread(int amount) 
+        public override string MakeBread(int amount) 
         {
+            if (amount == 0) return "";
             var sb = new StringBuilder();
             sb.AppendLine($"Making {amount} {Name} breads...");
             sb.AppendLine(base.MixIngredients(amount));
@@ -32,7 +30,7 @@ namespace BakeryApp.Domain.Entities
             sb.AppendLine(base.LetDoughRest());
             sb.AppendLine(base.Cook());
 
-            Console.WriteLine(sb.ToString());
+            return sb.ToString();
         }
         
         private string FoldDough()

@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BakeryApp.Application.Services;
+﻿
+using BakeryApp.Application.Interfaces;
 using BakeryApp.Domain.Entities;
 
 namespace BakeryApp.Application.UseCases
 {
     public class AddOrderUseCase
     {
-        private readonly OrderService _orderService;
+        private readonly IOrderService _orderService;
+        private readonly IOfficeService _officeService;
 
-        public AddOrderUseCase(OrderService orderService)
+        public AddOrderUseCase(IOrderService orderService, IOfficeService officeService)
         {
             _orderService = orderService;
+            _officeService = officeService;
         }
 
         public string Execute(string officeName, List<(string BreadType, int Quantity)> breadItems, string customer)
@@ -28,7 +26,7 @@ namespace BakeryApp.Application.UseCases
             }
             else 
             {
-                result = $"The order can't be added. The remaining capacity is: {_orderService.GetRemainingCapacity(officeName)}";
+                result = $"The order can't be added. The remaining capacity is: {_officeService.GetRemainingCapacity(officeName)}";
             }
             return result;
         }

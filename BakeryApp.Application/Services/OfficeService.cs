@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using BakeryApp.Application.DTOs;
 using BakeryApp.Application.Interfaces;
 using BakeryApp.Domain.Entities;
 using BakeryApp.Infrastructure.Repositories;
@@ -18,9 +15,7 @@ namespace BakeryApp.Application.Services
             _repository = repository;
         }
 
-        public List<BakeryOffice> GetAllOffices() => _repository.GetAllBakeryOffices();
-
-        public BakeryOffice GetOfficeByName(string name)
+        internal BakeryOffice GetOfficeByName(string name)
         {
             return _repository.GetBakeryOfficeByName(name) ?? throw new InvalidOperationException($"Office with name {name} not found.");
         }
@@ -47,6 +42,30 @@ namespace BakeryApp.Application.Services
                 return office.RemainingCapacity();
             }
             return -1;
+        }
+
+        public List<string> GetOfficesNames() 
+        {
+            var officesNames = new List<string>();
+            var offices = _repository.GetAllBakeryOffices();
+            foreach (var office in offices) 
+            {
+                officesNames.Add(office.Name);
+            }
+            return officesNames;
+        }
+
+        public OfficeData GetOfficeData(string name)
+        {
+            var office = GetOfficeByName(name); // Throws error if doesn't exist
+            return new OfficeData
+            {
+                Name = office.Name,
+                Address = office.Address,
+                RemainingCapacity = office.RemainingCapacity(),
+                OrderCount = office.Orders.Count
+            };
+
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BakeryApp.Domain.Entities
 {
@@ -19,7 +16,7 @@ namespace BakeryApp.Domain.Entities
             Name = name;
         }
 
-        public abstract void MakeBread(int amount);
+        public abstract string MakeBread(int amount);
         protected virtual string MixIngredients(int amount, int ignore = 0) 
         {
             var sb = new StringBuilder();
