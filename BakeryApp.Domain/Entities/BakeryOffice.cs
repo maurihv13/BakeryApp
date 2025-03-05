@@ -11,6 +11,8 @@ namespace BakeryApp.Domain.Entities
         public List<Bread> Menu { get; }
         public List<OrderList> Orders { get; }
 
+        private List<OrderList> _prepared;
+
         public BakeryOffice(string name, string address, int maxCapacity) 
         {
             Name = name;
@@ -18,6 +20,7 @@ namespace BakeryApp.Domain.Entities
             _maxCapacity = maxCapacity;
             Menu = [];
             Orders = [];
+            _prepared = [];
         }
 
         public void AddBread(Bread bread) 
@@ -43,8 +46,37 @@ namespace BakeryApp.Domain.Entities
         }
 
         public void CleanOrders() {
+            SavePrepared();
             Orders.Clear();
             _currentAmount = 0;
+        }
+
+        public double GetTotalEarned() 
+        {
+            double totalEarned = 0;
+            foreach (var order in _prepared) 
+            {
+                totalEarned += order.TotalPrice();
+            }
+            return totalEarned;
+        }
+
+        public int GetNumberPrepared() 
+        {
+            return _prepared.Count;
+        }
+
+        private void SavePrepared() 
+        {
+            foreach (var order in Orders)
+            {
+                var copiedOrder = new OrderList(order.CustomerName);
+                foreach (var detail in order.Details)
+                {
+                    copiedOrder.AddOrder(new OrderDetail(detail.Bread, detail.Amount));
+                }
+                _prepared.Add(copiedOrder);
+            }
         }
     }
 }

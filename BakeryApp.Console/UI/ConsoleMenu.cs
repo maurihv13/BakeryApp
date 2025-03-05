@@ -1,4 +1,5 @@
-﻿using BakeryApp.Application.Interfaces;
+﻿using BakeryApp.Application.DTOs;
+using BakeryApp.Application.Interfaces;
 using BakeryApp.Application.UseCases;
 
 namespace BakeryApp.Presentation.UI
@@ -28,6 +29,7 @@ namespace BakeryApp.Presentation.UI
                 {
                     Console.WriteLine($"{count++}. {office}");
                 }
+                Console.WriteLine($"{count}. Show earnings");
                 Console.WriteLine("0. Exit");
 
                 Console.Write("Write your selection: ");
@@ -36,7 +38,7 @@ namespace BakeryApp.Presentation.UI
                 try
                 {
                     int selected = int.Parse(input);
-                    if (selected < 0 || selected > officesNames.Count)
+                    if (selected < 0 || selected > count)
                     {
                         throw new ArgumentOutOfRangeException();
                     }
@@ -46,6 +48,13 @@ namespace BakeryApp.Presentation.UI
                         Console.WriteLine("------------------------------");
                         Console.WriteLine("Exit Program, Have a nice day.");
                         break;
+                    }
+
+                    if (selected == count)
+                    {
+                        var earnings = _officeService.GetAllEarnings();
+                        DisplayMessage($"There was a total of {earnings.Prepared} orders with an earned money of {earnings.TotalEarned}$us");
+                        continue;
                     }
 
                     var office = officesNames[selected-1];
@@ -193,7 +202,7 @@ namespace BakeryApp.Presentation.UI
             var addOrder = new AddOrderUseCase(_orderService, _officeService);
             double orderPrice = addOrder.GetPrice(breadItems);
             Console.WriteLine($"Total order price: {orderPrice}");
-            Console.Write("Are you sure you want to finish the order? (yes/no): ");
+            Console.Write("Are you sure you want to finish the order or cancel it? (yes/cancel): ");
             var confirmation = Console.ReadLine();
             if (confirmation?.ToLower() == "yes")
             {
@@ -201,6 +210,7 @@ namespace BakeryApp.Presentation.UI
                 DisplayMessage(result);
                 finished = true;
             }
+            if (confirmation?.ToLower() == "cancel") finished = true;
             return finished;
         }
 

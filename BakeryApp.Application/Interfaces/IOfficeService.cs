@@ -9,5 +9,6 @@ namespace BakeryApp.Application.Interfaces
         public int GetRemainingCapacity(string name);
         public List<string> GetOfficesNames();
         public OfficeData GetOfficeData(string name);
+        public EarningData GetAllEarnings();
     }
 }

@@ -67,5 +67,17 @@ namespace BakeryApp.Application.Services
             };
 
         }
+
+        public EarningData GetAllEarnings()
+        {
+            var earnings = new EarningData();
+            var offices = _repository.GetAllBakeryOffices();
+            foreach (var office in offices)
+            {
+                earnings.TotalEarned += office.GetTotalEarned();
+                earnings.Prepared += office.GetNumberPrepared();
+            }
+            return earnings;
+        }
     }
 }
