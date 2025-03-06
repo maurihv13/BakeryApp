@@ -109,9 +109,8 @@ namespace BakeryApp.Presentation.UI
         private void ShowAddOrderMenu(string office) 
         {
             var breadItems = new List<(string BreadType, int Quantity)>();
-            var breads = _officeService.GetBreads(office);
-            var addOrder = new AddOrderUseCase(_orderService, _officeService);
-
+            List<(string Type, double Price)> breads = _officeService.GetBreads(office);
+            
             Console.Write("Introduce customer's name: ");
 
             string? customerName = Console.ReadLine();
@@ -128,7 +127,7 @@ namespace BakeryApp.Presentation.UI
                 Console.WriteLine("Select an order option: ");
                 for (int i = 0; i < breads.Count; i++) {
                     var bread = breads[i];
-                    Console.WriteLine($"{i + 1}. Order {bread}");
+                    Console.WriteLine($"{i + 1}. Order {bread.Type} ({bread.Price}$xUnit)");
                 }
                 Console.WriteLine("0. Finish Order");
 
@@ -176,7 +175,7 @@ namespace BakeryApp.Presentation.UI
 
                     }
 
-                    breadItems.Add((breads[select - 1], quantity));
+                    breadItems.Add((breads[select - 1].Type, quantity));
                 }
                 catch (FormatException)
                 {

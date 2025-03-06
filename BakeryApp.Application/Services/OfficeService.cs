@@ -20,18 +20,20 @@ namespace BakeryApp.Application.Services
             return _repository.GetBakeryOfficeByName(name) ?? throw new InvalidOperationException($"Office with name {name} not found.");
         }
 
-        public List<string> GetBreads(string name) 
+        public List<(string Type, double Price)> GetBreads(string name) 
         {
             var breads = new List<string>();
+            var breadItems = new List<(string Type, double Price)>();
             var office = GetOfficeByName(name);
             if (office != null) 
             {
                 foreach (var bread in office.Menu) 
                 {
                     breads.Add(bread.Name);
+                    breadItems.Add((bread.Name, bread.Price));
                 }
             }
-            return breads;
+            return breadItems;
         }
 
         public int GetRemainingCapacity(string name) 
