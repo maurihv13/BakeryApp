@@ -1,46 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BakeryApp.Domain.Entities
 {
-    public class Baguette(Preparation preparation, double price) : Bread(preparation, price, "Baguette")
+    public class Baguette : Bread
     {
-        protected override void MixIngredients(int Amount)
+        public Baguette()
+            : base(new Preparation("15 min", "0.5 hr", "1 day", "270°"), 2.0, "Baguette")
         {
-            throw new NotImplementedException();
+            Preparation.AddIngredient("Flour", 280);
+            Preparation.AddIngredient("Water", 210);
+            Preparation.AddIngredient("Salt", 10);
+            Preparation.AddIngredient("Yeast", 5);
         }
 
-        protected override void CutDough(int Amount)
+        public override string MakeBread(int amount) 
         {
-            throw new NotImplementedException();
-        }
+            if (amount == 0) return "";
+            var sb = new StringBuilder();
+            sb.AppendLine($"Making {amount} {Name} breads...");
+            sb.AppendLine(base.MixIngredients(amount));
+            sb.AppendLine(base.LetDoughRest());
+            sb.AppendLine(FoldDough());
+            sb.AppendLine(base.LetDoughRest());
+            sb.AppendLine(FoldDough());
+            sb.AppendLine(base.LetDoughFerment());
+            if (amount > 1) sb.AppendLine(base.CutDough());
+            sb.AppendLine(base.ShapeDough());
+            sb.AppendLine(base.LetDoughRest());
+            sb.AppendLine(base.Cook());
 
-        protected override void LetDoughRest(int Amount)
-        {
-            throw new NotImplementedException();
+            return sb.ToString();
         }
-
-        protected override void ShapeDough(int Amount)
+        
+        private string FoldDough()
         {
-            throw new NotImplementedException();
-        }
-
-        protected override void LetDoughFerment(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void Cook(int Amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void FoldDough(int Amount)
-        {
-            throw new NotImplementedException();
+            return "Fold the dough.";
         }
     }
 }
