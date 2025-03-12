@@ -17,6 +17,7 @@ namespace BakeryApp.Presentation.UI
 
         public void ShowMainMenu() 
         {
+            _officeService.GetRepositoriesAsync();
             while (true) 
             {
                 Console.Clear();

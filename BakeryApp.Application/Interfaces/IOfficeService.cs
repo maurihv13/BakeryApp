@@ -10,5 +10,6 @@ namespace BakeryApp.Application.Interfaces
         public List<string> GetOfficesNames();
         public OfficeData GetOfficeData(string name);
         public EarningData GetAllEarnings();
+        public Task GetRepositoriesAsync();
     }
 }
