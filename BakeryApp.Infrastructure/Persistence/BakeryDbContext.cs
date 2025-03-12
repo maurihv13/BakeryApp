@@ -79,7 +79,6 @@ namespace BakeryApp.Infrastructure.Persistence
 
             var bread1 = new BreadEntity
             {
-                Id = 1,
                 Name = "Baguette",
                 Price = 2.0,
                 PreparationId = 1
@@ -87,7 +86,6 @@ namespace BakeryApp.Infrastructure.Persistence
 
             var bread2 = new BreadEntity
             {
-                Id = 2,
                 Name = "White Bread",
                 Price = 2.5,
                 PreparationId = 2
@@ -95,7 +93,6 @@ namespace BakeryApp.Infrastructure.Persistence
 
             var bread3 = new BreadEntity
             {
-                Id = 3,
                 Name = "Milk Bread",
                 Price = 1.5,
                 PreparationId = 3
@@ -103,35 +100,35 @@ namespace BakeryApp.Infrastructure.Persistence
 
             var bread6 = new BreadEntity
             {
-                Id = 6,
                 Name = "Hamburguer Bun",
                 Price = 1.0,
                 PreparationId = 6
             };
 
-            // Seed data
             modelBuilder.Entity<BakeryOfficeEntity>().HasData(bakeryOffice1, bakeryOffice2);
             modelBuilder.Entity<BreadEntity>().HasData(bread1, bread2, bread3, bread6);
             modelBuilder.Entity<PreparationEntity>().HasData(preparation1, preparation2, preparation3, preparation6);
+
+            modelBuilder.Entity<BreadEntity>()
+                .HasKey(b => b.Name);
 
             modelBuilder.Entity<BreadEntity>()
                 .HasOne(b => b.Preparation)
                 .WithMany()
                 .HasForeignKey(b => b.PreparationId);
 
-            // Establish relationships
             modelBuilder.Entity<BakeryOfficeEntity>()
                 .HasMany(bo => bo.Menu)
                 .WithMany(b => b.BakeryOffices)
                 .UsingEntity<Dictionary<string, object>>(
                     "BakeryOfficeBread",
                     j => j.HasData(
-                        new { BakeryOfficesId = 1, MenuId = 1 },
-                        new { BakeryOfficesId = 1, MenuId = 2 },
-                        new { BakeryOfficesId = 1, MenuId = 3 },
-                        new { BakeryOfficesId = 2, MenuId = 1 },
-                        new { BakeryOfficesId = 2, MenuId = 2 },
-                        new { BakeryOfficesId = 2, MenuId = 6 }
+                        new { BakeryOfficesId = 1, MenuName = "Baguette" },
+                        new { BakeryOfficesId = 1, MenuName = "White Bread" },
+                        new { BakeryOfficesId = 1, MenuName = "Milk Bread" },
+                        new { BakeryOfficesId = 2, MenuName = "Baguette" },
+                        new { BakeryOfficesId = 2, MenuName = "White Bread" },
+                        new { BakeryOfficesId = 2, MenuName = "Hamburguer Bun" }
                     )
                 );
         }

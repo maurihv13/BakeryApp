@@ -3,6 +3,7 @@ using BakeryApp.Application.DTOs;
 using BakeryApp.Application.Interfaces;
 using BakeryApp.Domain.Entities;
 using BakeryApp.Infrastructure.Persistence.Contracts;
+using BakeryApp.Infrastructure.Persistence.Repositories;
 using BakeryApp.Infrastructure.Repositories;
 
 namespace BakeryApp.Application.Services
@@ -10,11 +11,13 @@ namespace BakeryApp.Application.Services
     public class OfficeService : IOfficeService
     {
         private readonly IBakeryOfficeRepository _repository;
+        private readonly IBreadRepository _breadRepository;
         private readonly FakeBakeryOfficeRepository _repositoryFake;
 
-        public OfficeService(IBakeryOfficeRepository repository)
+        public OfficeService(IBakeryOfficeRepository repository, IBreadRepository breadRepository)
         {
             _repository = repository;
+            _breadRepository = breadRepository;
             _repositoryFake = new FakeBakeryOfficeRepository();
         }
 
@@ -85,10 +88,33 @@ namespace BakeryApp.Application.Services
             return earnings;
         }
 
-        public async Task GetRepositoriesAsync()
+        public async Task<List<string>> GetAllOfficeNamesFromDbAsync()
         {
-            var result = await _repository.GetAllAsync();
-            Console.WriteLine(result);
+            var offices = await _repository.GetAllAsync();
+            return offices.Select(o => o.Name).ToList();
+        }
+
+        public async Task<OfficeData> GetOfficeDataFromDbAsync(string name)
+        {
+            var officeEntity = await _repository.GetByNameAsync(name);
+            if (officeEntity == null)
+            {
+                throw new InvalidOperationException($"Office with name {name} not found.");
+            }
+
+            return new OfficeData
+            {
+                Name = officeEntity.Name,
+                Address = officeEntity.Address,
+                RemainingCapacity = officeEntity.MaxCapacity, // Assuming MaxCapacity is the remaining capacity
+                OrderCount = officeEntity.Orders.Count
+            };
+        }
+
+        public async Task<List<(string Type, double Price)>> GetBreadsFromDbAsync(string name)
+        {
+            var breads = await _breadRepository.GetBreadsByOfficeNameAsync(name);
+            return breads.Select(b => (b.Name, b.Price)).ToList();
         }
     }
 }

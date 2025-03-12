@@ -10,16 +10,15 @@ using Microsoft.Extensions.Hosting;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var host = CreateHostBuilder(args).Build();
 
-        // Resolve the services and use them
         var officeService = host.Services.GetRequiredService<IOfficeService>();
         var orderService = host.Services.GetRequiredService<IOrderService>();
 
         var menu = new ConsoleMenu(officeService, orderService);
-        menu.ShowMainMenu();
+        await menu.ShowMainMenuAsync();
     }
 
     static IHostBuilder CreateHostBuilder(string[] args) =>

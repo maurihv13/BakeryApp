@@ -8,5 +8,6 @@ namespace BakeryApp.Application.Interfaces
         public bool AddOrder(string officeName, OrderList order);
         public List<OrderList> GetOrders(string officeName);
         public void ProcessOrders(string officeName);
+        public Task<bool> AddOrderToDbAsync(string officeName, OrderList order);
     }
 }

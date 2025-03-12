@@ -23,9 +23,14 @@ namespace BakeryApp.Infrastructure.Persistence.Repositories
             return await _context.BakeryOffices.ToListAsync();
         }
 
-        public async Task<BakeryOfficeEntity> GetByIdAsync(int id)
+        public async Task<BakeryOfficeEntity?> GetByIdAsync(int id)
         {
             return await _context.BakeryOffices.FindAsync(id);
+        }
+
+        public async Task<BakeryOfficeEntity?> GetByNameAsync(string name)
+        {
+            return await _context.BakeryOffices.FirstOrDefaultAsync(bo => bo.Name == name);
         }
 
         public async Task AddAsync(BakeryOfficeEntity bakeryOffice)

@@ -15,16 +15,17 @@ namespace BakeryApp.Presentation.UI
             _orderService = orderService;
         }
 
-        public void ShowMainMenu() 
+        public async Task ShowMainMenuAsync() 
         {
-            _officeService.GetRepositoriesAsync();
+            
             while (true) 
             {
+                var officesNames = await _officeService.GetAllOfficeNamesFromDbAsync();
                 Console.Clear();
                 Console.WriteLine("===== Bakery Fresh Bread =====");
                 Console.WriteLine("Select a bakery office: ");
 
-                var officesNames = _officeService.GetOfficesNames();
+                // var officesNames = _officeService.GetOfficesNames();
                 var count = 1;
                 foreach (var office in officesNames) 
                 {
@@ -59,7 +60,7 @@ namespace BakeryApp.Presentation.UI
                     }
 
                     var office = officesNames[selected-1];
-                    ShowOfficeMenu(office);
+                    await ShowOfficeMenuAsync(office);
 
                 }
                 catch (FormatException)
@@ -73,14 +74,15 @@ namespace BakeryApp.Presentation.UI
             }
         }
 
-        private void ShowOfficeMenu(string office) 
+        private async Task ShowOfficeMenuAsync(string office) 
         {
             while (true) {
-                var officeData = _officeService.GetOfficeData(office);
+                // var officeData = _officeService.GetOfficeData(office);
+                var officeData = await _officeService.GetOfficeDataFromDbAsync(office);
                 Console.Clear();
                 Console.WriteLine($"===== {office} =====");
                 Console.WriteLine($"Address: {officeData.Address}");
-                Console.WriteLine($"Remaining capacity: {officeData.RemainingCapacity}");
+                Console.WriteLine($"Max capacity: {officeData.RemainingCapacity}");
                 Console.WriteLine($"Current orders: {officeData.OrderCount}");
                 Console.WriteLine($"===== Options =====");
 
@@ -94,7 +96,7 @@ namespace BakeryApp.Presentation.UI
                 switch (input) 
                 {
                     case "1":
-                        ShowAddOrderMenu(office);
+                        await ShowAddOrderMenuAsync(office);
                         break;
                     case "2":
                         ShowPreparationOrders(office);
@@ -107,11 +109,8 @@ namespace BakeryApp.Presentation.UI
             }
         }
 
-        private void ShowAddOrderMenu(string office) 
+        private async Task ShowAddOrderMenuAsync(string office) 
         {
-            var breadItems = new List<(string BreadType, int Quantity)>();
-            List<(string Type, double Price)> breads = _officeService.GetBreads(office);
-            
             Console.Write("Introduce customer's name: ");
 
             string? customerName = Console.ReadLine();
@@ -120,6 +119,11 @@ namespace BakeryApp.Presentation.UI
                 DisplayErrorMessage("Customer name cannot be empty.");
                 return;
             }
+
+            var breadItems = new List<(string BreadType, int Quantity)>();
+            // List<(string Type, double Price)> breads = _officeService.GetBreads(office);
+
+            List<(string Type, double Price)> breads = await _officeService.GetBreadsFromDbAsync(office);
 
             while (true) 
             {

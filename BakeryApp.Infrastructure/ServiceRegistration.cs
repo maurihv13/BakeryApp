@@ -22,6 +22,7 @@ namespace BakeryApp.Infrastructure
             services.AddScoped<IBakeryOfficeRepository, BakeryOfficeRepository>();
             services.AddScoped<IOrderListRepository, OrderListRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IBreadRepository, BreadRepository>();
 
             return services;
         }

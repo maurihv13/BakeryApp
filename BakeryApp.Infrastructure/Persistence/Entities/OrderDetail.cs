@@ -10,6 +10,7 @@ namespace BakeryApp.Infrastructure.Persistence.Entities
     {
         public int Id { get; set; }
         public int BreadId { get; set; }
+        public string BreadName { get; set; }
         public BreadEntity Bread { get; set; }
         public int Amount { get; set; }
     }

@@ -8,7 +8,6 @@ namespace BakeryApp.Infrastructure.Persistence.Entities
 {
     public class BreadEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public int PreparationId { get; set; }
