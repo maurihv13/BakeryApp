@@ -8,9 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BakeryApp.Application\BakeryApp.Application.csproj" />
     <ProjectReference Include="..\BakeryApp.Domain\BakeryApp.Domain.csproj" />
     <ProjectReference Include="..\BakeryApp.Infrastructure\BakeryApp.Infrastructure.csproj" />
   </ItemGroup>
+
+    <ItemGroup>
+	    <None Update="appsettings.json">
+		    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    </None>
+    </ItemGroup>
 
 </Project>
