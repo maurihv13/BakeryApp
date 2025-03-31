@@ -30,7 +30,9 @@ namespace BakeryApp.Infrastructure.Persistence.Repositories
 
         public async Task<BakeryOfficeEntity?> GetByNameAsync(string name)
         {
-            return await _context.BakeryOffices.FirstOrDefaultAsync(bo => bo.Name == name);
+            return await _context.BakeryOffices
+                .Include(bo => bo.Orders)
+                .FirstOrDefaultAsync(bo => bo.Name == name);
         }
 
         public async Task AddAsync(BakeryOfficeEntity bakeryOffice)

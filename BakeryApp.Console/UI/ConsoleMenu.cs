@@ -211,6 +211,7 @@ namespace BakeryApp.Presentation.UI
             if (confirmation?.ToLower() == "yes")
             {
                 var result = addOrder.Execute(office, breadItems, customerName);
+                Console.Clear();
                 DisplayMessage(result);
                 finished = true;
             }

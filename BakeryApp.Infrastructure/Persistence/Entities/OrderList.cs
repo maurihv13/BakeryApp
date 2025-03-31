@@ -11,5 +11,6 @@ namespace BakeryApp.Infrastructure.Persistence.Entities
         public int Id { get; set; }
         public string CustomerName { get; set; }
         public List<OrderDetailEntity> Orders { get; set; } = [];
+        public int BakeryOfficeEntityId { get; set; }
     }
 }
