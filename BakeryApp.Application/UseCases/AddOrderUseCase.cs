@@ -17,17 +17,18 @@ namespace BakeryApp.Application.UseCases
 
         public string Execute(string officeName, List<(string BreadType, int Quantity)> breadItems, string customer)
         {
-            string result = "";
+            string result = "Order added succesfully";
             var order = MapItemsToOrder(breadItems);
             order.CustomerName = customer;
-            if (_orderService.AddOrder(officeName, order))
+            _orderService.AddOrderToDbAsync(officeName, order).Wait();
+            /*if (_orderService.AddOrder(officeName, order))
             {
                 result = "Order added succesfully";
             }
             else 
             {
                 result = $"The order can't be added. The remaining capacity is: {_officeService.GetRemainingCapacity(officeName)}";
-            }
+            }*/
             return result;
         }
 

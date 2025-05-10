@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BakeryApp.Domain\BakeryApp.Domain.csproj" />
-    <ProjectReference Include="..\BakeryApp.Infrastructure\BakeryApp.Infrastructure.csproj" />
+	  <ProjectReference Include="..\BakeryApp.Infrastructure\BakeryApp.Infrastructure.csproj" />  
   </ItemGroup>
 
 </Project>
